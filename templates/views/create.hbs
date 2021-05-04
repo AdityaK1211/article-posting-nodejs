@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create New Article</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+    
+    <link rel="icon" href='/img/blog.png'>
+    <link rel="stylesheet" href='/css/styles.css'>
+</head>
+<body>
+    {{>header}}
+    <header class="masthead">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+            <div class="page-heading">
+            <h1>Create New Post</h1>
+            </div>
+        </div>
+        </div>
+    </div>
+    </header>
+
+    <div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+        <form action="/posts/store" method="POST">
+            <div class="control-group">
+            <div class="form-group floating-label-form-group controls">
+                <label>Title</label>
+                <input type="text" name="title" placeholder="Title" class="form-control">
+            </div>
+            </div>
+            <div class="control-group">
+            <div class="form-group floating-label-form-group controls">
+                <label>Description</label>
+                <input type="text" name="description" placeholder="Description" class="form-control">
+            </div>
+            </div>
+            <div class="form-group">
+                <div class="form-group floating-label-form-group controls">
+                <label>Select a Topic</label>
+                <select id="topic" name="topic" value="">
+                    <option name="art" value="art">Art</option>
+                    <option name="gaming" value="gaming">Gaming</option>
+                    <option name="philosophy" value="philosophy">Philosophy</option>
+                    <option name="technology" value="technology">Technology</option>
+                    <option name="others" id="newTopic" value="others">Other</option>
+                </select>
+                </div>
+            </div>
+            <div class="control-group">
+            <div class="form-group floating-label-form-group controls">
+                <label>Content</label>
+                <textarea name="content" placeholder="Content ..." cols="30" rows="5" class="form-control"></textarea>
+            </div>
+            </div>
+            <div class="form-group mt-3">
+                <input type="file" name="image" class="form-control-file">
+            </div>
+            <div class="form-group my-4 text-center">
+            <button type="submit" class="btn btn-primary">Create Post</button>
+            <button type="reset" class="btn btn-danger">Cancel</button>
+            </div>
+        </form>
+        </div>
+    </div>
+    </div>
+    
+    {{>footer}}
+
+    <script>
+        window.onload = function() {
+            if (topic != null) {
+                var selBox = document.getElementById('topic');
+                selBox.onchange = function(){
+                    if(this.value == 'others'){
+                        const topic = prompt("Please create new topic")
+                        document.getElementById('newTopic').text = topic
+                        document.getElementById('newTopic').value = topic
+                    }
+                }
+                
+            }
+        }
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

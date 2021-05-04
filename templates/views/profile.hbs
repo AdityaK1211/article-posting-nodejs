@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Profile</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+    
+    <link rel="icon" href='/img/blog.png'>
+    <link rel="stylesheet" href='/css/styles.css'>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<body>
+    {{>header}}
+    <div class="container emp-profile">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="profile-img">
+                    <h1>Profile </h1>
+                </div>
+                <div class="profile-head">
+                    <h4>{{user.username}}</h4>
+                    <h5>{{user.email}}</h5>
+                    <h6>Joined in {{createdAt}}</h6>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h6>Articles</h6>
+                        </div>
+                        <div class="col-md-4">
+                            <h6>Followers</h6>
+                        </div>
+                        <div class="col-md-4">
+                            <h6>Following</h6>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h4 id="articleCount">{{articles.length}}</h4>
+                        </div>
+                        <div class="col-md-4">
+                            <h4 id="followerCount">{{user.followers.length}}</h4>
+                        </div>
+                        <div class="col-md-4">
+                            <h4 id="followingCount">{{user.following.length}}</h4>
+                        </div>
+                    </div>
+                    <a href="/profile/edit" class="btn btn-primary">Edit Profile</a>
+                    <a href="/posts/new" class="btn btn-success">New Post</a>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="w3-bar w3-black">
+                    <button class="w3-bar-item w3-button tablink w3-red" onclick="openCity(event,'articles')">Articles</button>
+                    <button class="w3-bar-item w3-button tablink" onclick="openCity(event,'followers')">Followers</button>
+                    <button class="w3-bar-item w3-button tablink" onclick="openCity(event,'following')">Following</button>
+                </div>
+                <div id="articles" class="w3-container w3-border city">
+                    {{#each articles}}
+                    <div class="post-preview">
+                        <a href="/posts/{{ this._id }}">
+                            <h2 class="post-title">
+                            {{this.title}}
+                            </h2>
+                        </a>
+                        <h4>{{this.description}}</h4>
+                        <p class="post-meta">Posted on {{ this.createdAt }}</p>
+                    </div>
+                    {{/each}}
+                    <hr>
+                </div>
+
+                <div id="followers" class="w3-container w3-border city" style="display:none">
+                    {{#each user.followers}}
+                    <div class="post-preview">
+                        <h4></h4>
+                    </div>
+                    {{/each}}> 
+                </div>
+
+                <div id="following" class="w3-container w3-border city" style="display:none">
+                    <h2>Tokyo</h2>
+                    <p>Tokyo is the capital of Japan.</p>
+                </div>
+                
+            </div>
+        </div>                   
+    </div>
+
+    <hr>
+    {{>footer}}
+
+    <script>
+        function openCity(evt, cityName) {
+        var i, x, tablinks;
+        x = document.getElementsByClassName("city");
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablink");
+        for (i = 0; i < x.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" w3-red", "");
+        }
+        document.getElementById(cityName).style.display = "block";
+        evt.currentTarget.className += " w3-red";
+        }
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

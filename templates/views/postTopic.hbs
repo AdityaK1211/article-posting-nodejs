@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Articles by Topic</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+    
+    <link rel="icon" href='/img/blog.png'>
+    <link rel="stylesheet" href='/css/styles.css'>
+</head>
+<body>
+    {{>header}}   
+
+    <!-- Main Content -->
+    <div class="container-fluid mb-2">
+    <div class="row">
+        <div class="col-lg-3 col-md-2 text-center">
+            <div class="card p-2 m-2">
+                <h4 class="card-title">
+                    Hello {{username}}
+                </h4>
+                <p>Create a new post</p>
+                <a href="/posts/new" class="btn btn-success">New Post</a>
+            </div>
+            <div class="card p-2 m-2">
+                <h4 class="card-title">
+                    Most Recent Articles
+                </h4>
+                <a href="/posts/recent" class="btn btn-success">Get Most Recent Articles</a>
+            </div>
+            <div class="card p-2 m-2">
+                <h4 class="card-title">
+                    Search by Topic
+                </h4>
+                <form method="GET" action="/posts">
+                    <div class="control-group">
+                        <div class="form-group floating-label-form-group controls">
+                            <input type="text" class="form-control" id="topic" name="topic" placeholder="Enter a Topic">
+                        </div>
+                    </div>
+                    <div class="form-group my-4 text-center">
+                        <button class="btn btn-success">Search by Topic</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-lg-8 col-md-10 mx-auto">
+            <h2>{{ topic }}</h2>
+            {{#each articles}}
+            <div class="post-preview">
+                <a href="/posts/{{ this._id }}">
+                    <h2 class="post-title" id="postNotFound">
+                    {{this.title}}
+                    </h2>
+                </a>
+                <h4>{{this.description}}</h4>
+                <p class="post-meta">Posted on {{ this.createdAt }}</p>
+            </div>
+            {{/each}}
+            <hr>
+        <!-- Pager -->
+        <div class="clearfix">
+            <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
+        </div>
+        </div>
+    </div>
+    </div>
+
+    {{>footer}}
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
