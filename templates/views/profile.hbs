@@ -74,19 +74,24 @@
                 </div>
 
                 <div id="followers" class="w3-container w3-border city" style="display:none">
-                    {{#each user.followers}}
-                    <div class="post-preview">
-                        <h4></h4>
-                    </div>
-                    {{/each}}
+                    {{#each userFollowers}}
+                        <div class="post-preview">
+                            <h4>{{this.username}}</h4>
+                        </div>
+                    {{/each}} 
+                    <hr>      
                 </div>
 
                 <div id="following" class="w3-container w3-border city" style="display:none">
-                    {{#each user.follwing}}
-                    <div class="post-preview">
-                        <h4></h4>
-                    </div>
+                    {{#each userFollowing}}
+                        <div class="post-preview">
+                            <h4>{{this.username}}</h4>
+                            <form id="followForm" method="POST" action="/{{this.id}}/unfollow">
+                                <button id="followId" type="submit" class="btn btn-success">Unfollow</button>
+                            </form>
+                        </div>
                     {{/each}}
+                    <hr>      
                 </div>
                 
             </div>
