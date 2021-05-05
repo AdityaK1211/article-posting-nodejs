@@ -17,7 +17,7 @@ const sendWelcomeEmail = (email, name) => {
 const sendCancelationEmail = (email, name) => {
     sgMail.send({
         to: email,
-        from: 'adityak2527@gmail.com',
+        from: `${process.env.EMAIL_ID}`,
         subject: 'Sorry to see you go!',
         text: `Goodbye, ${name}. \n\nI hope to see you back sometime soon.\n\nThank You\nTeam Article Posting`
     })
